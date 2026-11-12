@@ -8,6 +8,9 @@ on:
         required: true
         default: 'patch'
 
+permissions:
+  contents: read
+
 jobs:
   Publish:
     name: Publish
@@ -15,14 +18,14 @@ jobs:
     if: github.ref == 'refs/heads/main'
     steps:
       - name: checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@0717577d45739eb3c851188b29f50ed6c0b2194e # v2
         with:
           token: ${{ secrets.ADMIN_TOKEN }}
           ref: 'main'
           # pulls all commits (needed for lerna / semantic release to correctly version)
           fetch-depth: '0'
 
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@f1f314fca9dfce2769ece7d933488f076716723e # v1
         with:
           node-version: 18
           registry-url: https://registry.npmjs.org/
